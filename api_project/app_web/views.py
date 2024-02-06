@@ -10,7 +10,9 @@ from django.http.response import JsonResponse
 def login(request):
     try:
         data = json.loads(request.body)
-        print(data)
-        return HttpResponse("aaaaa")
+        if "name" in data and "password" in data:
+            if data["name"] == "admin123" and data["password"] == "111111":
+                return JsonResponse(dict(code=1, msg="ok"))
+        return JsonResponse(dict(code=0, msg="fail"))
     except Exception as e:
-        return HttpResponse("bbbbbb")
+        return JsonResponse(dict(code=0, msg=f"{e}"))
