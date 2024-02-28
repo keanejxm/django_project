@@ -18,5 +18,7 @@ from django.urls import path,include
 import app_web.views as web_view
 
 urlpatterns = [
-    path("login/",web_view.login)
+    path("login/",web_view.login),
+    path("tableList/",web_view.table_list),
+    path("wmsList/",web_view.wms_list),
 ]
