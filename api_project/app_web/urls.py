@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.urls import path,include
 import app_web.views as web_view
+# from app_web.views import YuXinTieCheng
 
 urlpatterns = [
     path("login/",web_view.login),
     path("tableList/",web_view.table_list),
     path("wmsList/",web_view.wms_list),
+    # yuxin
+    path("yuxin/status/count/",web_view.yu_xin_status_count),
+
 ]

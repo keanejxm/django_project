@@ -1,5 +1,6 @@
 import json
-
+from app_web.yuxin_tiecheng.data_web import DataWeb
+from django.views import View
 from django.shortcuts import render, HttpResponse
 from django.http.response import JsonResponse
 
@@ -87,3 +88,22 @@ def wms_list(request):
         return JsonResponse(dict(code=1, msg="ok", result=data))
     except Exception as e:
         return JsonResponse(dict(code=0, msg="fail", reason=e))
+
+
+# class YuXinTieCheng(View):
+#     def __init__(self):
+#         super().__init__()
+#         self.data_web = DataWeb()
+#
+#     def get(self, request):
+#         pass
+#
+#     def status_count(self, request):
+#         def get(request):
+#             data = self.data_web.count_task_status()
+#             return JsonResponse(dict(code=1, msg="ok", data=data))
+
+def yu_xin_status_count(request):
+    data_web = DataWeb()
+    data = data_web.count_task_status()
+    return JsonResponse(dict(code=1, msg="ok", data=data))
