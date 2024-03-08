@@ -24,5 +24,6 @@ urlpatterns = [
     path("wmsList/",web_view.wms_list),
     # yuxin
     path("yuxin/status/count/",web_view.yu_xin_status_count),
+    path("yuxin/person/count/",web_view.yu_xin_person_count),
 
 ]

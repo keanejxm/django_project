@@ -103,7 +103,15 @@ def wms_list(request):
 #             data = self.data_web.count_task_status()
 #             return JsonResponse(dict(code=1, msg="ok", data=data))
 
+# 统计已上线任务和未上线任务数量
 def yu_xin_status_count(request):
     data_web = DataWeb()
     data = data_web.count_task_status()
     return JsonResponse(dict(code=1, msg="ok", data=data))
+
+
+# 按人统计已上线和未上线数量
+def yu_xin_person_count(request):
+    data_web = DataWeb()
+    data, keys = data_web.count_num_person()
+    return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))

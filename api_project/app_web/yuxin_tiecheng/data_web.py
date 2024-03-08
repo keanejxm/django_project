@@ -33,6 +33,7 @@ class DataWeb:
             "taskStatus": "任务状态"
         }
         self.excel_df = self.init_excel_data()
+        self.excel_df.replace({"taskStatus": np.nan}, "未上线", inplace=True)
 
     def read_excel(self):
         filepath = f"{self.filepath}/TM整体进度表.xlsx"
@@ -79,11 +80,33 @@ class DataWeb:
         return df
 
     def count_task_status(self):
-        """"""
-        self.excel_df.replace({"taskStatus": np.nan}, "未上线", inplace=True)
+        """
+        统计已上线数量和未上线数量
+        :return:
+        """
         count_status = self.excel_df["taskStatus"].value_counts()
         # 将数据转为[{"value":num,"name":"已上线"}]的格式
         data = list()
         for index, value in count_status.items():
             data.append(dict(value=value, name=index))
         return data
+
+    def count_num_person(self):
+        """
+        # 按人统计已上线数量和未上线数量
+        :return:
+        """
+        grouped = self.excel_df.groupby(["taskStatus", "realExploiter"]).groups
+        data = dict()
+        keys = ["name"]
+        for group_key, group_value in grouped.items():
+            status_task, name = group_key
+            num_task = len(group_value)
+            if name in data:
+                data[name][status_task] = num_task
+            else:
+                data[name] = {"name": name, status_task: num_task}
+            keys.append(status_task)
+        new_data = [value for key, value in data.items()]
+        keys = list(set(keys))
+        return new_data, keys
