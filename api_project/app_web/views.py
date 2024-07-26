@@ -115,3 +115,27 @@ def yu_xin_person_count(request):
     data_web = DataWeb()
     data, keys = data_web.count_num_person()
     return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))
+
+
+def yu_xin_module_count(request):
+    data_web = DataWeb()
+    data, keys = data_web.count_num_module()
+    return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))
+
+
+def yu_xin_date_use_story(request):
+    data_web = DataWeb()
+    data, keys = data_web.date_use_story()
+    return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))
+
+
+def yu_xin_schedule_story(request):
+    data_web = DataWeb()
+    data, keys = data_web.schedule_story()
+    return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))
+
+
+def yu_xin_flaw_story_count(request):
+    data_web = DataWeb()
+    data, keys = data_web.flaw_count()
+    return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))
