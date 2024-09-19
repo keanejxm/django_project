@@ -8,7 +8,7 @@
 """
 import pandas as pd
 def question_answer():
-    df = pd.read_excel("桥梁与地下工程复习题.xlsx", sheet_name="单选题")
+    df = pd.read_excel(r"E:\keane_python\github\django_project\api_project\app_web\question_answer\桥梁与地下工程复习题.xlsx", sheet_name="单选题")
     id_num = 0
     question_list = list()
     for df_index, df_value in df.iterrows():

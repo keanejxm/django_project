@@ -30,6 +30,6 @@ urlpatterns = [
     path("yuxin/date/use/story/", web_view.yu_xin_date_use_story),
     path("yuxin/schedule/story/", web_view.yu_xin_schedule_story),
     path("yuxin/flaw/story/count/", web_view.yu_xin_flaw_story_count),
-    path("question/", web_view.yu_xin_flaw_story_count),
+    path("question/", web_view.question_answer),
 
 ]

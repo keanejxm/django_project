@@ -144,4 +144,4 @@ def yu_xin_flaw_story_count(request):
 def question_answer(request):
     from app_web.question_answer.question_answer import question_answer
     data = question_answer()
-    return JsonResponse(dict(code=1, msg="ok", data=data))
+    return JsonResponse(dict(code=1, msg="ok", data=data[0:10]))
