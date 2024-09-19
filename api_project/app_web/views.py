@@ -139,3 +139,9 @@ def yu_xin_flaw_story_count(request):
     data_web = DataWeb()
     data, keys = data_web.flaw_count()
     return JsonResponse(dict(code=1, msg="ok", data=data, keys=keys))
+
+
+def question_answer(request):
+    from app_web.question_answer.question_answer import question_answer
+    data = question_answer()
+    return JsonResponse(dict(code=1, msg="ok", data=data))
