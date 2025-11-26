@@ -36,7 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',# 解决跨域问题
-    'app_web'
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'app_web',
+    'app_auth'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +78,17 @@ WSGI_APPLICATION = 'api_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎（MySQL）
+        'NAME': 'birdfly',                # 数据库名（需提前在MySQL中创建）
+        'USER': 'root',                # MySQL用户名（如root）
+        'PASSWORD': 'e279b46aac6483addbaa278362c81744',        # 密码
+        'HOST': '192.168.206.137',                   # 数据库地址（本地用localhost）
+        'PORT': '3306',                        # 端口（MySQL默认3306）
+        # 可选：添加连接超时、字符集等配置
+        'OPTIONS': {
+            'charset': 'utf8mb4',              # 支持emoji等特殊字符
+            'connect_timeout': 10,
+        }
     }
 }
 
@@ -118,6 +130,42 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 自定义用户模型
+AUTH_USER_MODEL = 'app_auth.User'
+
+# 确保在应用加载前设置自定义用户模型
+
+# JWT 配置
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': True,
+    
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUDIENCE': None,
+    'ISSUER': None,
+    'JWK_URL': None,
+    'LEEWAY': 0,
+    
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
 
 
 # 支持跨域配置开始

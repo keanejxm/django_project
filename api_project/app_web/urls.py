@@ -20,16 +20,18 @@ import app_web.views as web_view
 # from app_web.views import YuXinTieCheng
 
 urlpatterns = [
-    path("login/", web_view.login),
+    # 数据列表接口
     path("tableList/", web_view.table_list),
     path("wmsList/", web_view.wms_list),
-    # yuxin
+    
+    # yuxin 数据统计接口
     path("yuxin/status/count/", web_view.yu_xin_status_count),
     path("yuxin/person/count/", web_view.yu_xin_person_count),
     path("yuxin/module/count/", web_view.yu_xin_module_count),
     path("yuxin/date/use/story/", web_view.yu_xin_date_use_story),
     path("yuxin/schedule/story/", web_view.yu_xin_schedule_story),
     path("yuxin/flaw/story/count/", web_view.yu_xin_flaw_story_count),
+    
+    # 问答接口
     path("question/", web_view.question_answer),
-
 ]
