@@ -15,4 +15,7 @@ urlpatterns = [
     
     # 业务数据模块
     path('api/', include('app_web.urls')),
+    
+    # 文档模块
+    path('api/docs/', include('app_documents.urls')),
 ]
